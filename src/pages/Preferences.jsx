@@ -1,25 +1,25 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import Label from "../components/Label";
-import Input from "../components/Input";
-import Textarea from "../components/Textarea";
 import Select from "../components/Select";
 import ToggleSwitch from "../components/ToggleSwitch";
 import Radio from "../components/Radio";
 import Checkbox from "../components/Checkbox";
 import Badge from "../components/Badge";
-import DatePicker from "../components/DatePicker";
 import Tooltip from "../components/Tooltip";
 import Progress from "../components/Progress";
-import Accordion from "../components/Accordian";
-import Popover from "../components/Popover";
-import Carousel from "../components/Carousel";
-function About() {
+import { useNavigate } from "react-router-dom";
+
+function Preferences() {
   const [isToggleOn, setIsToggleOn] = useState(false);
   const handleToggle = () => setIsToggleOn(!isToggleOn);
   const [selectedDate, setSelectedDate] = useState("");
   const handleDateChange = (e) => setSelectedDate(e.target.value);
   const [progressValue, setProgressValue] = useState(70);
+  const navigate = useNavigate();
+  function handleClick() {
+    navigate("/security");
+  }
   const carouselImages = [
     "https://images.pexels.com/photos/27068594/pexels-photo-27068594/free-photo-of-towers-of-castle-among-trees.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
     "https://images.pexels.com/photos/28733751/pexels-photo-28733751/free-photo-of-steam-train-on-glenfinnan-viaduct-at-sunset.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
@@ -84,9 +84,9 @@ function About() {
             <Checkbox label="Share activity with friends" />
 
             <Button
-              label="Update Changes"
+              label="Go to security section"
               color="blue"
-              onClick={() => alert("Submitted!")}
+              onClick={handleClick}
             />
           </div>
         </div>
@@ -98,4 +98,4 @@ function About() {
   );
 }
 
-export default About;
+export default Preferences;

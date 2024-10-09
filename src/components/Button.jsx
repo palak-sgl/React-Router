@@ -7,12 +7,14 @@ function Button({ label, onClick, color }) {
     red: "bg-red-600 text-white",
   };
   return (
-    <button
-      onClick={onClick}
-      className={` ${buttonColor[color]} px-4 py-1 text-center ml-16 rounded-md shadow-lg mt-7`}
-    >
-      {label}
-    </button>
+    <div className="flex justify-center">
+      <button
+        onClick={onClick}
+        className={` ${buttonColor[color]} px-4 py-1 text-center rounded-md shadow-lg mt-7`}
+      >
+        {label}
+      </button>
+    </div>
   );
 }
 

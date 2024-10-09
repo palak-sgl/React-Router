@@ -1,20 +1,14 @@
 import { useState } from "react";
-import Button from "../components/Button";
 import Label from "../components/Label";
 import Input from "../components/Input";
-import Textarea from "../components/Textarea";
-import Select from "../components/Select";
-import ToggleSwitch from "../components/ToggleSwitch";
-import Radio from "../components/Radio";
 import Checkbox from "../components/Checkbox";
 import Badge from "../components/Badge";
-import DatePicker from "../components/DatePicker";
+
 import Tooltip from "../components/Tooltip";
 import Progress from "../components/Progress";
 import Accordion from "../components/Accordian";
 import Popover from "../components/Popover";
-import Carousel from "../components/Carousel";
-function Github() {
+function Security() {
   const [isToggleOn, setIsToggleOn] = useState(false);
   const handleToggle = () => setIsToggleOn(!isToggleOn);
   const [selectedDate, setSelectedDate] = useState("");
@@ -76,4 +70,4 @@ function Github() {
   );
 }
 
-export default Github;
+export default Security;

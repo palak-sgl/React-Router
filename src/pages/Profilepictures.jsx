@@ -202,7 +202,7 @@ import Carousel from "../components/Carousel";
 //     </div>
 //   );
 // }
-function Comp() {
+function Profilepictures() {
   const [progressValue, setProgressValue] = useState(70);
   const carouselImages = [
     "https://images.pexels.com/photos/27068594/pexels-photo-27068594/free-photo-of-towers-of-castle-among-trees.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
@@ -224,4 +224,4 @@ function Comp() {
   );
 }
 
-export default Comp;
+export default Profilepictures;
