@@ -55,11 +55,11 @@ function Security() {
               <Popover content="Your password must be 8 characters long having uppercase, lowercase and a special character." />
             </div>
             <Checkbox label="I agree to the terms" />
-            <Accordion
+            {/* <Accordion
               title="Your other social profiles."
               content="LinkedIn"
               content2="Twitter"
-            />
+            /> */}
           </div>
         </div>
         <h3 className="mt-14">Your Security Settings Progress</h3>

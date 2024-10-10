@@ -10,6 +10,8 @@ import Preferences from "./pages/Preferences.jsx";
 import Security from "./pages/Security.jsx";
 import Demo from "./pages/Demo.jsx";
 import Profilepictures from "./pages/Profilepictures.jsx";
+import Summary from "./pages/Summary.jsx";
+import Login from "./pages/Login.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +21,8 @@ const router = createBrowserRouter(
       <Route path="security" element={<Security />} />
       <Route path="demo" element={<Demo />} />
       <Route path="profilepictures" element={<Profilepictures />} />
+      <Route path="summary" element={<Summary />} />
+      <Route path="login" element={<Login />} />
     </Route>
   )
 );

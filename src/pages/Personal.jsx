@@ -9,16 +9,11 @@ import Tooltip from "../components/Tooltip";
 import Progress from "../components/Progress";
 
 function Personal() {
-  const [isToggleOn, setIsToggleOn] = useState(false);
-  const handleToggle = () => setIsToggleOn(!isToggleOn);
+  // const [isToggleOn, setIsToggleOn] = useState(false);
+  // const handleToggle = () => setIsToggleOn(!isToggleOn);
   const [selectedDate, setSelectedDate] = useState("");
   const handleDateChange = (e) => setSelectedDate(e.target.value);
   const [progressValue, setProgressValue] = useState(70);
-  const carouselImages = [
-    "https://images.pexels.com/photos/27068594/pexels-photo-27068594/free-photo-of-towers-of-castle-among-trees.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-    "https://images.pexels.com/photos/28733751/pexels-photo-28733751/free-photo-of-steam-train-on-glenfinnan-viaduct-at-sunset.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-    "https://images.pexels.com/photos/14252751/pexels-photo-14252751.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
-  ];
   return (
     <>
       {/* <Header /> */}

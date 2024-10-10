@@ -1,8 +1,13 @@
-function Checkbox({ label }) {
+function Checkbox({ label, onChange }) {
   return (
-    <div className="flex mt-3 items-center space-x-2">
-      <input type="checkbox" id="1" className="cursor-pointer" />
-      <label className="cursor-pointer" for="1">
+    <div className="flex mt-3 items-center py-2 px-6 space-x-2">
+      <input
+        type="checkbox"
+        id="1"
+        className="cursor-pointer accent-blue-800"
+        onChange={onChange}
+      />
+      <label className="cursor-pointer " for="1">
         {label}
       </label>
     </div>

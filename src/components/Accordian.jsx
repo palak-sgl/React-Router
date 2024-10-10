@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-function Accordion({ title, content, content2 }) {
+function Accordion({ title, children }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="cursor-pointer border border-gray-100 rounded-md  p-4 mt-3">
+    <div className="cursor-pointer border w-[750px] border-gray-50 bg-gray-50 rounded-md  p-4 mt-3">
       <div
         className="flex flex-row justify-between"
         onClick={() => setIsOpen(!isOpen)}
@@ -19,9 +19,8 @@ function Accordion({ title, content, content2 }) {
         </div>
       </div>
       {isOpen && (
-        <div className="mt-2 bg-gray-50 text-black p-2 rounded-md">
-          {content} <br />
-          {content2}
+        <div className="mt-4 bg-white text-black p-2 rounded-md">
+          {children}
         </div>
       )}
     </div>

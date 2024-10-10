@@ -1,11 +1,12 @@
 import React from "react";
 
 export default function Label(props) {
-  const { someLabel } = props;
+  const { someLabel, children } = props;
   return (
     <div>
-      <label htmlFor="" className=" text-md text-red-600 font-semibold ">
+      <label htmlFor="" className=" text-sm font-semibold ">
         {someLabel}
+        {children}
       </label>
     </div>
   );
