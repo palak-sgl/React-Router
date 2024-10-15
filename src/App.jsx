@@ -12,6 +12,7 @@ import Demo from "./pages/Demo.jsx";
 import Profilepictures from "./pages/Profilepictures.jsx";
 import Summary from "./pages/Summary.jsx";
 import Login from "./pages/Login.jsx";
+import GetStarted from "./pages/GetStarted.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="profilepictures" element={<Profilepictures />} />
       <Route path="summary" element={<Summary />} />
       <Route path="login" element={<Login />} />
+      <Route path="started" element={<GetStarted />} />
     </Route>
   )
 );

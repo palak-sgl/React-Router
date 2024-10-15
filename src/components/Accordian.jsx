@@ -9,7 +9,7 @@ function Accordion({ title, children }) {
         className="flex flex-row justify-between"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="cursor-pointer font-semibold">{title}</div>
+        <div className="cursor-pointer font-medium">{title}</div>
         <div className=" cursor-pointer">
           <i
             className={`fa-solid ${

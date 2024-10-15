@@ -9,7 +9,7 @@ import Badge from "../components/Badge";
 import Tooltip from "../components/Tooltip";
 import Progress from "../components/Progress";
 import { useNavigate } from "react-router-dom";
-import Dropdown from "../components/Dropdown";
+// import Dropdown from "../components/Dropdown";
 
 function Preferences() {
   const [isToggleOn, setIsToggleOn] = useState(false);
