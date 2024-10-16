@@ -18,7 +18,7 @@ function Select(props) {
         ))}
       </select>
       <div
-        className={`absolute bottom-3 lg:right-4 md:right-4 text-xs flex pointer-events-none ${className} `}
+        className={`absolute bottom-3 lg:left-48 md:left-72 sm:left-[630px] text-xs flex pointer-events-none ${className} `}
       >
         <i className="fa-solid fa-chevron-down cursor-pointer"></i>
       </div>
