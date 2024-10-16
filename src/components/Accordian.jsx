@@ -1,18 +1,19 @@
 import { useState } from "react";
 
-function Accordion({ title, children, isTOpen, onToggle }) {
-  const [isOpen, setIsOpen] = useState(false);
+function Accordion({ title, children, isOpen, setActiveStep, stepNumber }) {
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="cursor-pointer border w-[750px] bg-gray-50 rounded-md  py-3 mt-3">
       <div
         className="flex flex-row justify-between"
-        onClick={() => setIsOpen(!isOpen)}
-        onToggle={onToggle}
-        isTOpen={isTOpen}
+        // onClick={() => setIsOpen(!isOpen)}
       >
         <div className="cursor-pointer font-normal px-8 text-md">{title}</div>
-        <div className=" cursor-pointer">
+        <div
+          className=" cursor-pointer"
+          onClick={() => setActiveStep(stepNumber)}
+        >
           <i
             className={`fa-solid ${
               isOpen ? "fa-chevron-up" : "fa-chevron-down"

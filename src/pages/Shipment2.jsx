@@ -86,7 +86,7 @@ const Shipment2 = ({
               <div>
                 <select
                   name="igst"
-                  className=" mt-2 text-md px-3 py-2 border border-gray-300 rounded-md focus:ring-1 focus:ring-indigo-600  text-gray-900 focus:outline-none  transition-all duration-200 hover:bg-gray-50 sm:w-full cursor-not-allowed "
+                  className=" mt-2 text-sm text-gray-400 px-3 py-[7px] border border-gray-300 rounded-md focus:ring-1 focus:ring-indigo-600  focus:outline-none  transition-all duration-200 hover:bg-gray-50 sm:w-full cursor-not-allowed "
                   disabled
                 >
                   <option value="0">0%</option>
@@ -113,7 +113,7 @@ const Shipment2 = ({
         onClick={handleAddComponent}
       >
         +{" "}
-        <span className="text-indigo-800 font-semibold underline">
+        <span className="text-indigo-800 font-normal underline">
           Add Another Product
         </span>
       </button>

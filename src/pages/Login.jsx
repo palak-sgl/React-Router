@@ -6,10 +6,15 @@ import Select from "../components/Select";
 import Checkbox from "../components/Checkbox";
 import Button from "../components/Button";
 import ShipmentInformation from "./ShipmentInformation";
-import Consigner from "./Consigner";
+import Consigner from "./Consignor";
 import ShippingPartner from "./ShippingPartner";
 
 function Login() {
+  const [openAccordion, setOpenAccordion] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setOpenAccordion(openAccordion === index ? null : index);
+  };
   const [selectedCountry, setSelectedCountry] = useState("");
   const [countryMessage, setCountryMessage] = useState("");
   const [selectedState, setSelectedState] = useState("");
@@ -33,9 +38,6 @@ function Login() {
   const [pincodeMessage, setPincodeMessage] = useState("");
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
   const [showBillingAddress, setShowBillingAddress] = useState(false);
-
-  const [isLoginOpen, setIsLoginOpen] = useState(true); // Open state for Login accordion
-  const [isShipmentOpen, setIsShipmentOpen] = useState(false);
 
   const handleCheckboxChange = (e) => {
     setBillingSameAsShipping(e.target.checked);
@@ -220,8 +222,6 @@ function Login() {
       pincodeMessage === ""
     ) {
       handleSubmit(e);
-      setIsLoginOpen(false);
-      setIsShipmentOpen(true);
     }
   };
 
@@ -241,17 +241,25 @@ function Login() {
       pincode,
       billingSameAsShipping,
     });
+    setActiveStep(3);
   };
 
+  //active step - state variable - 1,2,3,4
+
+  const [activeStep, setActiveStep] = useState(1);
+  console.log(activeStep, "activeStep");
   return (
     <div className="flex justify-center items-center mt-10 flex-col font-poppins">
-      <Consigner />
-
       <Accordion
-        title="Consignee Details"
-        isOpen={isLoginOpen}
-        onToggle={() => setIsLoginOpen(!isLoginOpen)}
+        title="Consignor Details"
+        isOpen={activeStep === 1}
+        setActiveStep={setActiveStep}
+        stepNumber={1}
       >
+        <Consigner setActiveStep={setActiveStep} />
+      </Accordion>
+
+      <Accordion title="Consignee Details" isOpen={activeStep === 2}>
         <form onSubmit={handleValidation}>
           <div className="pt-1 px-6">
             <h2 className="text-[15px] font-semibold text-left">
@@ -512,13 +520,12 @@ function Login() {
           />
         </form>
       </Accordion>
-      <Accordion title="Shipment Information">
-        <ShipmentInformation
-          isOpen={isShipmentOpen}
-          onToggle={() => setIsLoginOpen(!isShipmentOpen)}
-        />
+      <Accordion title="Shipment Information" isOpen={activeStep === 3}>
+        <ShipmentInformation setActiveStep={setActiveStep} />
       </Accordion>
-      <ShippingPartner />
+      <Accordion title="Select Shipping Partner" isOpen={activeStep === 4}>
+        <ShippingPartner />
+      </Accordion>
     </div>
   );
 }

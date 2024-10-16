@@ -7,7 +7,7 @@ import Select from "../components/Select";
 import Shipment2 from "./Shipment2";
 import Button from "../components/Button";
 
-function ShipmentInformation() {
+function ShipmentInformation({ setActiveStep }) {
   const [invoiceNumber, setInvoiceNumber] = useState("");
   const [invoiceNumberMessage, setInvoiceNumberMessage] = useState("");
   const [invoiceDate, setInvoiceDate] = useState("");
@@ -113,6 +113,7 @@ function ShipmentInformation() {
     productNameValidation();
     hsnValidation();
     qtyValidation();
+
     handleSubmit(e);
   };
 
@@ -121,6 +122,7 @@ function ShipmentInformation() {
     console.log({
       invoiceNumber,
     });
+    setActiveStep(4);
   };
 
   const currency = [
@@ -193,7 +195,7 @@ function ShipmentInformation() {
                 className="flex-grow p-2 border rounded-l border-gray-200 focus:border-l-indigo-600 focus:border-t-indigo-600 focus:border-b-indigo-600 focus:outline-none transition-all duration-200 hover:bg-gray-50 w-28"
                 onChange={(e) => setDeadWeight(e.target.value)}
               />
-              <span className="px-3 bg-gray-200 rounded-r border border-gray-200 py-1.5">
+              <span className="px-3 bg-gray-200 rounded-r text-sm py-2.5 border border-gray-200">
                 kg
               </span>{" "}
               {/* Fixed component */}
@@ -213,7 +215,7 @@ function ShipmentInformation() {
                 className="flex-grow p-2 border rounded-l border-gray-200  focus:border-l-indigo-600 focus:border-t-indigo-600 focus:border-b-indigo-600 focus:outline-none transition-all duration-200 hover:bg-gray-50 w-28"
                 onChange={(e) => setLength(e.target.value)}
               />
-              <span className="px-3 bg-gray-200 border-gray-200  rounded-r py-1.5 border border-l-gray-200">
+              <span className="px-3 bg-gray-200 border-gray-200  rounded-r text-sm py-2.5 border border-l-gray-200">
                 cm
               </span>{" "}
               {/* Fixed component */}
@@ -231,7 +233,7 @@ function ShipmentInformation() {
                 className="flex-grow p-2 border rounded-l-md  focus:border-l-indigo-600 focus:border-t-indigo-600 focus:border-b-indigo-600 focus:outline-none transition-all duration-200 hover:bg-gray-50 w-28"
                 onChange={(e) => setBreadth(e.target.value)}
               />
-              <span className="px-3 bg-gray-200 border border-l-gray-200 rounded-r py-1.5">
+              <span className="px-3 bg-gray-200 border border-l-gray-200 rounded-r text-sm py-2.5">
                 cm
               </span>{" "}
               {/* Fixed component */}
@@ -249,7 +251,9 @@ function ShipmentInformation() {
                 className="flex-grow p-2 border rounded-l-md  focus:border-l-indigo-600 focus:border-t-indigo-600 focus:border-b-indigo-600 focus:outline-none transition-all duration-200 hover:bg-gray-50 w-28"
                 onChange={(e) => setHeight(e.target.value)}
               />
-              <span className="px-3 bg-gray-200 rounded-r-md py-1.5">cm</span>{" "}
+              <span className="px-3 bg-gray-200 rounded-r-md text-sm py-2.5">
+                cm
+              </span>{" "}
               {/* Fixed component */}
             </div>
             <p className="text-xs text-red-600 font-medium">{heightMessage}</p>
