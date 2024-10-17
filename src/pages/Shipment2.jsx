@@ -9,16 +9,20 @@ const Shipment2 = ({
   productNameMessage,
   hsnMessage,
   qtyMessage,
+  isOpen,
+  setIsOpen,
 }) => {
   const [addComponent, setAddComponent] = useState([{ component: "" }]);
 
-  const handleAddComponent = () => {
+  const handleAddComponent = (e) => {
+    e.preventDefault();
     setAddComponent((prev) => [...prev, { component: "" }]);
   };
   const handleRemoveComponent = (indexToRemove) => {
     const updatedComponents = addComponent.filter(
       (_, index) => index !== indexToRemove
     );
+
     setAddComponent(updatedComponents);
   };
 
@@ -95,12 +99,12 @@ const Shipment2 = ({
                 </select>
               </div>
               {index > 0 && (
-                <button
+                <div
                   onClick={() => handleRemoveComponent(index)}
                   className="ml-3 mt-1 text-red-600"
                 >
                   <i className="fa-regular fa-trash-can"></i>
-                </button>
+                </div>
               )}
             </div>
           </div>

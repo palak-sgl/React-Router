@@ -4,21 +4,37 @@ import Button from "../components/Button";
 import Select from "../components/Select";
 import { useState } from "react";
 function Consigner({ setActiveStep }) {
-  const customer = [{ label: "Select Customer", value: "c1" }];
+  const customer = [
+    { label: "Select Customer", value: "c1" },
+    { label: "xyz", value: "c2" },
+  ];
   const [searchCustomer, setSearchCustomer] = useState("");
   const [searchCustomerMessage, setSearchCustomerMessage] = useState("");
   // const [isOpen,setIsOpen] = useState(false)
 
-  // const searchCustomerValidation = () => {
-  //   if (searchCustomer === "") {
-  //     setSearchCustomerMessage("Please select a customer or add new customer");
-  //   } else {
-  //     setSearchCustomerMessage("");
-  //   }
-  // };
+  const searchCustomerValidation = () => {
+    if (searchCustomer === "") {
+      setSearchCustomerMessage("Please select a customer or add new customer");
+    } else {
+      setSearchCustomerMessage("");
+    }
+  };
+
+  const handleValidation = (e) => {
+    e.preventDefault();
+    searchCustomerValidation();
+    if (searchCustomerMessage === "") {
+      handleSubmit(e);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    console.log(searchCustomer);
+    setActiveStep(2);
+  };
 
   return (
-    <div>
+    <form>
       <div className="pt-1 px-6">
         <h2 className="text-[15px]  text-left">Search Customer</h2>
       </div>
@@ -34,24 +50,12 @@ function Consigner({ setActiveStep }) {
         label="Continue"
         color="indigo"
         type="button"
-        onClick={() => setActiveStep(2)}
+        onClick={handleValidation}
         className="ml-[550px] "
       />
       {/* </Accordion> */}
-    </div>
+    </form>
   );
 }
 
 export default Consigner;
-{
-  /* <select
-          name="customer"
-          id=""
-          className=" mt-2 ml-4 text-md px-3 py-1.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-indigo-600  text-gray-900 focus:outline-none  transition-all duration-200 hover:bg-gray-50 w-[500px] appearance-none"
-        >
-            
-          <option value="0">Select Customer</option>
-          <option value="10">10%</option>
-          <option value="20">20%</option>
-        </select> */
-}

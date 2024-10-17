@@ -10,11 +10,11 @@ import Consigner from "./Consignor";
 import ShippingPartner from "./ShippingPartner";
 
 function Login() {
-  const [openAccordion, setOpenAccordion] = useState(null);
+  // const [openAccordion, setOpenAccordion] = useState(null);
 
-  const toggleAccordion = (index) => {
-    setOpenAccordion(openAccordion === index ? null : index);
-  };
+  // const toggleAccordion = (index) => {
+  //   setOpenAccordion(openAccordion === index ? null : index);
+  // };
   const [selectedCountry, setSelectedCountry] = useState("");
   const [countryMessage, setCountryMessage] = useState("");
   const [selectedState, setSelectedState] = useState("");
@@ -86,164 +86,144 @@ function Login() {
     setSelectedState(state);
   };
 
-  const emailValidation = () => {
-    const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (email === "") {
-      setEmailMessage("Please enter a valid email address");
-    } else if (regEx.test(email)) {
-      setEmailMessage("");
-    } else {
-      setEmailMessage("Email is not valid");
-    }
-  };
-
-  const firstNameValidation = () => {
-    const regEx = /[a-zA-Z]$/;
-    if (firstName === "") {
-      setFirstNameMessage("First name is required");
-    } else if (!regEx.test(firstName)) {
-      setFirstNameMessage("Please enter alphabetic characters");
-    } else {
-      setFirstNameMessage("");
-    }
-  };
-
-  const lastNameValidation = () => {
-    const regEx = /[a-zA-Z]$/;
-    if (lastName === "") {
-      setLastNameMessage("Last name is required");
-    } else if (!regEx.test(lastName)) {
-      setLastNameMessage("Please enter alphabetic characters");
-    } else {
-      setLastNameMessage("");
-    }
-  };
-
-  const mobileNumberValidation = () => {
-    const regEx = /^[0-9()+\-\s]*$/;
-
-    if (mobileNumber === "") {
-      setMobileMessage("Mobile Number is required");
-    } else if (!regEx.test(mobileNumber)) {
-      setMobileMessage("Only numbers, brackets, hyphen and + are allowed.");
-    } else if (mobileNumber.replace(/[^0-9]/g, "").length !== 10) {
-      setMobileMessage("Must be a 10 digit mobile number");
-    } else {
-      setMobileMessage("");
-    }
-  };
-
-  const address1Validation = () => {
-    const regEx = /^[a-zA-Z0-9,\/#&()_.\-\s]*$/;
-    if (address1 === "") {
-      setAddress1Message("Address 1 is required");
-    } else if (!regEx.test(address1)) {
-      setAddress1Message(
-        "Address 1 can only contain alphabets, numbers and special characters"
-      );
-    } else {
-      setAddress1Message("");
-    }
-  };
-
-  const address2Validation = () => {
-    const regEx = /^[a-zA-Z0-9,\/#&()_.\-\s]*$/;
-    if (address2 === "") {
-      setAddress2Message("Address 2 is required");
-    } else if (!regEx.test(address2)) {
-      setAddress2Message(
-        "Address 2 can only contain alphabets, numbers and special characters"
-      );
-    } else {
-      setAddress2Message("");
-    }
-  };
-
-  const countryValidation = () => {
-    if (selectedCountry === "") {
-      setCountryMessage("Please select a country");
-    } else {
-      setCountryMessage("");
-    }
-  };
-
-  const stateValidation = () => {
-    if (selectedState === "") {
-      setStateMessage("Please select a state");
-    } else {
-      setStateMessage("");
-    }
-  };
-
-  const cityValidation = () => {
-    const regEx = /^[0-9!@#$%&*]$/;
-    if (city === "") {
-      setCityMessage("City is required");
-    } else if (regEx.test(city)) {
-      setCityMessage("Only alphabets and spaces are allowed");
-    } else {
-      setCityMessage("");
-    }
-  };
-
-  const pincodeValidation = () => {
-    const regEx = /[0-9]$/;
-    if (pincode === "") {
-      setPincodeMessage("Pincode is required");
-    } else if (!regEx.test(pincode)) {
-      setPincodeMessage("Only numbers are allowed");
-    } else {
-      setPincodeMessage("");
-    }
-  };
-
   const handleValidation = (e) => {
     e.preventDefault();
-    emailValidation();
-    firstNameValidation();
-    lastNameValidation();
-    mobileNumberValidation();
-    address1Validation();
-    address2Validation();
-    countryValidation();
-    stateValidation();
-    cityValidation();
-    pincodeValidation();
-    if (
-      emailMessage === "" &&
-      firstNameMessage === "" &&
-      lastNameMessage === "" &&
-      mobileMessage === "" &&
-      address1Message === "" &&
-      address2Message === "" &&
-      countryMessage === "" &&
-      stateMessage === "" &&
-      cityMessage === "" &&
-      pincodeMessage === ""
+    let isValid = true;
+    let tempEmailMessage = "";
+    let tempFirstNameMessage = "";
+    let tempLastNameMessage = "";
+    let tempMobileMessage = "";
+    let tempAddress1Message = "";
+    let tempAddress2Message = "";
+    let tempCountryMessage = "";
+    let tempStateMessage = "";
+    let tempCityMessage = "";
+    let tempPincodeMessage = "";
+
+    // Email validation
+    const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (email === "") {
+      tempEmailMessage = "Please enter a valid email address";
+      isValid = false;
+    } else if (!emailRegEx.test(email)) {
+      tempEmailMessage = "Email is not valid";
+      isValid = false;
+    }
+
+    // First Name validation
+    const nameRegEx = /^[a-zA-Z]+$/;
+    if (firstName === "") {
+      tempFirstNameMessage = "First name is required";
+      isValid = false;
+    } else if (!nameRegEx.test(firstName)) {
+      tempFirstNameMessage = "Please enter alphabetic characters";
+      isValid = false;
+    }
+
+    // Last Name validation
+    if (lastName === "") {
+      tempLastNameMessage = "Last name is required";
+      isValid = false;
+    } else if (!nameRegEx.test(lastName)) {
+      tempLastNameMessage = "Please enter alphabetic characters";
+      isValid = false;
+    }
+
+    // Mobile Number validation
+    const mobileRegEx = /^[0-9()+\-\s]*$/;
+    if (mobileNumber === "") {
+      tempMobileMessage = "Mobile Number is required";
+      isValid = false;
+    } else if (
+      !mobileRegEx.test(mobileNumber) ||
+      mobileNumber.replace(/[^0-9]/g, "").length !== 10
     ) {
-      handleSubmit(e);
+      tempMobileMessage = "Must be a 10 digit mobile number";
+      isValid = false;
+    }
+
+    // Address 1 validation
+    const addressRegEx = /^[a-zA-Z0-9,\/#&()_.\-\s]*$/;
+    if (address1 === "") {
+      tempAddress1Message = "Address 1 is required";
+      isValid = false;
+    } else if (!addressRegEx.test(address1)) {
+      tempAddress1Message = "Address 1 can only contain valid characters";
+      isValid = false;
+    }
+
+    // Address 2 validation
+    if (address2 === "") {
+      tempAddress2Message = "Address 2 is required";
+      isValid = false;
+    } else if (!addressRegEx.test(address2)) {
+      tempAddress2Message = "Address 2 can only contain valid characters";
+      isValid = false;
+    }
+
+    // Country validation
+    if (selectedCountry === "") {
+      tempCountryMessage = "Please select a country";
+      isValid = false;
+    }
+
+    // State validation
+    if (selectedState === "") {
+      tempStateMessage = "Please select a state";
+      isValid = false;
+    }
+
+    // City validation
+    const cityRegEx = /^[a-zA-Z\s]+$/;
+    if (city === "") {
+      tempCityMessage = "City is required";
+      isValid = false;
+    } else if (!cityRegEx.test(city)) {
+      tempCityMessage = "Only alphabets and spaces are allowed";
+      isValid = false;
+    }
+
+    // Pincode validation
+    const pincodeRegEx = /^[0-9]+$/;
+    if (pincode === "") {
+      tempPincodeMessage = "Pincode is required";
+      isValid = false;
+    } else if (!pincodeRegEx.test(pincode)) {
+      tempPincodeMessage = "Only numbers are allowed";
+      isValid = false;
+    }
+
+    setEmailMessage(tempEmailMessage);
+    setFirstNameMessage(tempFirstNameMessage);
+    setLastNameMessage(tempLastNameMessage);
+    setMobileMessage(tempMobileMessage);
+    setAddress1Message(tempAddress1Message);
+    setAddress2Message(tempAddress2Message);
+    setCountryMessage(tempCountryMessage);
+    setStateMessage(tempStateMessage);
+    setCityMessage(tempCityMessage);
+    setPincodeMessage(tempPincodeMessage);
+
+    if (isValid) {
+      console.log({
+        firstName,
+        lastName,
+        mobileNumber,
+        email,
+        address1,
+        address2,
+        landmark,
+        selectedCountry,
+        selectedState,
+        city,
+        pincode,
+        billingSameAsShipping,
+      });
+      setActiveStep(3);
+      setShowChangeButton(true);
     }
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({
-      firstName,
-      lastName,
-      mobileNumber,
-      email,
-      address1,
-      address2,
-      landmark,
-      selectedCountry,
-      selectedState,
-      city,
-      pincode,
-      billingSameAsShipping,
-    });
-    setActiveStep(3);
-  };
-
+  const [showChangeButton, setShowChangeButton] = useState(false);
   //active step - state variable - 1,2,3,4
 
   const [activeStep, setActiveStep] = useState(1);
@@ -255,11 +235,18 @@ function Login() {
         isOpen={activeStep === 1}
         setActiveStep={setActiveStep}
         stepNumber={1}
+        number="1"
+        showChangeButton="Change"
       >
         <Consigner setActiveStep={setActiveStep} />
       </Accordion>
 
-      <Accordion title="Consignee Details" isOpen={activeStep === 2}>
+      <Accordion
+        title="Consignee Details"
+        isOpen={activeStep === 2}
+        number="2"
+        showChangeButton="Change"
+      >
         <form onSubmit={handleValidation}>
           <div className="pt-1 px-6">
             <h2 className="text-[15px] font-semibold text-left">
@@ -520,10 +507,20 @@ function Login() {
           />
         </form>
       </Accordion>
-      <Accordion title="Shipment Information" isOpen={activeStep === 3}>
+      <Accordion
+        title="Shipment Information"
+        isOpen={activeStep === 3}
+        stepNumber={3}
+        number="3"
+      >
         <ShipmentInformation setActiveStep={setActiveStep} />
       </Accordion>
-      <Accordion title="Select Shipping Partner" isOpen={activeStep === 4}>
+      <Accordion
+        title="Select Shipping Partner"
+        isOpen={activeStep === 4}
+        stepNumber={4}
+        number="4"
+      >
         <ShippingPartner />
       </Accordion>
     </div>

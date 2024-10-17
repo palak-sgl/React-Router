@@ -21,108 +21,98 @@ function ShipmentInformation({ setActiveStep }) {
   const [height, setHeight] = useState("");
   const [heightMessage, setHeightMessage] = useState("");
   const [productName, setProductName] = useState("");
-  const [productNameMessage, setProductNametMessage] = useState("");
+  const [productNameMessage, setProductNameMessage] = useState("");
   const [hsn, setHsn] = useState("");
   const [hsnMessage, setHsnMessage] = useState("");
   const [qty, setQty] = useState("");
   const [qtyMessage, setQtyMessage] = useState("");
 
-  const invoiceNumberValidation = () => {
-    const regEx = /[a-zA-Z0-9]$/;
-    if (invoiceNumber === "") {
-      setInvoiceNumberMessage("Please Enter Invoice Number");
-    } else if (!regEx.test(invoiceNumber)) {
-      setInvoiceNumberMessage("Please enter alphanumeric characters");
-    } else {
-      setInvoiceNumberMessage("");
-    }
-  };
-
-  const invoiceDateValidation = () => {
-    if (invoiceDate === "") {
-      setInvoiceDateMessage("Please select Invoice Date");
-    } else {
-      setInvoiceDateMessage("");
-    }
-  };
-
-  const deadWeightValidation = () => {
-    if (deadWeight === "" || deadWeight < 0.01) {
-      setDeadWeightMessage("Weight must be atleast 0.01 KG");
-    } else {
-      setDeadWeightMessage("");
-    }
-  };
-
-  const lengthValidation = () => {
-    if (length === "" || length < 1) {
-      setLengthMessage("Length must be atleast 1 cm");
-    } else {
-      setLengthMessage("");
-    }
-  };
-
-  const breadthValidation = () => {
-    if (breadth === "" || breadth < 1) {
-      setBreadthMessage("Breadth must be atleast 1 cm");
-    } else {
-      setBreadthMessage("");
-    }
-  };
-
-  const heightValidation = () => {
-    if (height === "" || height < 1) {
-      setHeightMessage("Height must be atleast 1 cm");
-    } else {
-      setHeightMessage("");
-    }
-  };
-
-  const productNameValidation = () => {
-    if (productName === "") {
-      setProductNametMessage("Required");
-    } else {
-      setProductNametMessage("");
-    }
-  };
-
-  const hsnValidation = () => {
-    if (hsn === "") {
-      setHsnMessage("HSN must be 8 digits long");
-    } else {
-      setHsnMessage("");
-    }
-  };
-
-  const qtyValidation = () => {
-    if (qty === "") {
-      setQtyMessage("Required");
-    } else {
-      setQtyMessage("");
-    }
-  };
+  const [isOpen, setIsOpen] = useState(true);
 
   const handleValidation = (e) => {
     e.preventDefault();
-    invoiceNumberValidation();
-    invoiceDateValidation();
-    deadWeightValidation();
-    lengthValidation();
-    breadthValidation();
-    heightValidation();
-    productNameValidation();
-    hsnValidation();
-    qtyValidation();
+    let isValid = true;
+    let tempInvoiceNumberMessage = "";
+    let tempInvoiceDateMessage = "";
+    let tempDeadWeightMessage = "";
+    let tempLengthMessage = "";
+    let tempBreadthMessage = "";
+    let tempHeightMessage = "";
+    let tempProductNameMessage = "";
+    let tempHsnMessage = "";
+    let tempQtyMessage = "";
 
-    handleSubmit(e);
-  };
+    const invoiceRegEx = /[a-zA-Z0-9]$/;
+    if (invoiceNumber === "") {
+      tempInvoiceNumberMessage = "Please Enter Invoice Number";
+      isValid = false;
+    } else if (!invoiceRegEx.test(invoiceNumber)) {
+      tempInvoiceNumberMessage = "Please enter alphanumeric characters";
+      isValid = false;
+    }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log({
-      invoiceNumber,
-    });
-    setActiveStep(4);
+    if (invoiceDate === "") {
+      tempInvoiceDateMessage = "Please select Invoice Date";
+      isValid = false;
+    }
+    if (deadWeight === "" || deadWeight < 0.01) {
+      tempDeadWeightMessage = "Weight must be atleast 0.01 KG";
+      isValid = false;
+    }
+
+    if (length === "" || length < 1) {
+      tempLengthMessage = "Length must be atleast 1 cm";
+      isValid = false;
+    }
+
+    if (breadth === "" || breadth < 1) {
+      tempBreadthMessage = "Breadth must be atleast 1 cm";
+      isValid = false;
+    }
+
+    if (height === "" || height < 1) {
+      tempHeightMessage = "Height must be atleast 1 cm";
+      isValid = false;
+    }
+
+    if (productName === "") {
+      tempProductNameMessage = "Required";
+      isValid = false;
+    }
+
+    if (hsn === "") {
+      tempHsnMessage = "HSN must be 8 digits long";
+      isValid = false;
+    }
+    if (qty === "") {
+      tempQtyMessage = "Required";
+      isValid = false;
+    }
+    setInvoiceNumberMessage(tempInvoiceNumberMessage);
+    setInvoiceDateMessage(tempInvoiceDateMessage);
+    setDeadWeightMessage(tempDeadWeightMessage);
+    setLengthMessage(tempLengthMessage);
+    setBreadthMessage(tempBreadthMessage);
+    setHeightMessage(tempHeightMessage);
+    setProductNameMessage(tempProductNameMessage);
+    setHsnMessage(tempHsnMessage);
+    setQtyMessage(tempQtyMessage);
+
+    if (isValid) {
+      console.log({
+        invoiceNumber,
+        invoiceDate,
+        deadWeight,
+        length,
+        breadth,
+        height,
+        productName,
+        hsn,
+        qty,
+      });
+      setActiveStep(4);
+      setShowChangeButton(true);
+    }
   };
 
   const currency = [
@@ -276,6 +266,8 @@ function ShipmentInformation({ setActiveStep }) {
           productNameMessage={productNameMessage}
           hsnMessage={hsnMessage}
           qtyMessage={qtyMessage}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
         />
         <Button
           label="Select Shipping"

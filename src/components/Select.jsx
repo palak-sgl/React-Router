@@ -6,7 +6,7 @@ function Select(props) {
   return (
     <div className="relative">
       <select
-        className={`border text-sm mt-2 text-gray-400 rounded sm:w-full p-3 py-2 focus:outline-indigo-500 appearance-none cursor-pointer ${className}`}
+        className={`border text-sm mt-2 rounded sm:w-full p-3 py-2 focus:outline-indigo-500 appearance-none cursor-pointer ${className}`}
         defaultValue="Choose One"
         onChange={onChange}
         value={value}

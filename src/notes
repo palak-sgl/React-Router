@@ -1,0 +1,225 @@
+// const emailValidation = () => {
+//   const regEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+//   if (email === "") {
+//     setEmailMessage("Please enter a valid email address");
+//   } else if (regEx.test(email)) {
+//     setEmailMessage("");
+//   } else {
+//     setEmailMessage("Email is not valid");
+//   }
+// };
+
+// const firstNameValidation = () => {
+//   const regEx = /[a-zA-Z]$/;
+//   if (firstName === "") {
+//     setFirstNameMessage("First name is required");
+//   } else if (!regEx.test(firstName)) {
+//     setFirstNameMessage("Please enter alphabetic characters");
+//   } else {
+//     setFirstNameMessage("");
+//   }
+// };
+
+// const lastNameValidation = () => {
+//   const regEx = /[a-zA-Z]$/;
+//   if (lastName === "") {
+//     setLastNameMessage("Last name is required");
+//   } else if (!regEx.test(lastName)) {
+//     setLastNameMessage("Please enter alphabetic characters");
+//   } else {
+//     setLastNameMessage("");
+//   }
+// };
+
+// const mobileNumberValidation = () => {
+//   const regEx = /^[0-9()+\-\s]*$/;
+
+//   if (mobileNumber === "") {
+//     setMobileMessage("Mobile Number is required");
+//   } else if (!regEx.test(mobileNumber)) {
+//     setMobileMessage("Only numbers, brackets, hyphen and + are allowed.");
+//   } else if (mobileNumber.replace(/[^0-9]/g, "").length !== 10) {
+//     setMobileMessage("Must be a 10 digit mobile number");
+//   } else {
+//     setMobileMessage("");
+//   }
+// };
+
+// const address1Validation = () => {
+//   const regEx = /^[a-zA-Z0-9,\/#&()_.\-\s]*$/;
+//   if (address1 === "") {
+//     setAddress1Message("Address 1 is required");
+//   } else if (!regEx.test(address1)) {
+//     setAddress1Message(
+//       "Address 1 can only contain alphabets, numbers and special characters"
+//     );
+//   } else {
+//     setAddress1Message("");
+//   }
+// };
+
+// const address2Validation = () => {
+//   const regEx = /^[a-zA-Z0-9,\/#&()_.\-\s]*$/;
+//   if (address2 === "") {
+//     setAddress2Message("Address 2 is required");
+//   } else if (!regEx.test(address2)) {
+//     setAddress2Message(
+//       "Address 2 can only contain alphabets, numbers and special characters"
+//     );
+//   } else {
+//     setAddress2Message("");
+//   }
+// };
+
+// const countryValidation = () => {
+//   if (selectedCountry === "") {
+//     setCountryMessage("Please select a country");
+//   } else {
+//     setCountryMessage("");
+//   }
+// };
+
+// const stateValidation = () => {
+//   if (selectedState === "") {
+//     setStateMessage("Please select a state");
+//   } else {
+//     setStateMessage("");
+//   }
+// };
+
+// const cityValidation = () => {
+//   const regEx = /^[0-9!@#$%&*]$/;
+//   if (city === "") {
+//     setCityMessage("City is required");
+//   } else if (regEx.test(city)) {
+//     setCityMessage("Only alphabets and spaces are allowed");
+//   } else {
+//     setCityMessage("");
+//   }
+// };
+
+// const pincodeValidation = () => {
+//   const regEx = /[0-9]$/;
+//   if (pincode === "") {
+//     setPincodeMessage("Pincode is required");
+//   } else if (!regEx.test(pincode)) {
+//     setPincodeMessage("Only numbers are allowed");
+//   } else {
+//     setPincodeMessage("");
+//   }
+// };
+
+// const handleValidation = (e) => {
+//   e.preventDefault();
+//   emailValidation();
+//   firstNameValidation();
+//   lastNameValidation();
+//   mobileNumberValidation();
+//   address1Validation();
+//   address2Validation();
+//   countryValidation();
+//   stateValidation();
+//   cityValidation();
+//   pincodeValidation();
+//   if (
+//     emailMessage === "" &&
+//     firstNameMessage === "" &&
+//     lastNameMessage === "" &&
+//     mobileMessage === "" &&
+//     address1Message === "" &&
+//     address2Message === "" &&
+//     countryMessage === "" &&
+//     stateMessage === "" &&
+//     cityMessage === "" &&
+//     pincodeMessage === ""
+//   ) {
+//     console.log({
+//       firstName,
+//       lastName,
+//       mobileNumber,
+//       email,
+//       address1,
+//       address2,
+//       landmark,
+//       selectedCountry,
+//       selectedState,
+//       city,
+//       pincode,
+//       billingSameAsShipping,
+//     });
+//     setActiveStep(3);
+//   }
+// };
+
+// const handleSubmit = (e) => {
+//   e.preventDefault();
+//   console.log({
+//     firstName,
+//     lastName,
+//     mobileNumber,
+//     email,
+//     address1,
+//     address2,
+//     landmark,
+//     selectedCountry,
+//     selectedState,
+//     city,
+//     pincode,
+//     billingSameAsShipping,
+//   });
+//   setActiveStep(3);
+// };
+
+// import { useState } from "react";
+
+// function Accordion({ title, children, isOpen, setActiveStep, stepNumber }) {
+//   return (
+//     <div className="cursor-pointer border w-[750px] bg-gray-50 rounded-md pt-3 mt-3">
+//       <div className="flex flex-row justify-between">
+//         <div className="cursor-pointer font-normal px-8 pb-3 text-md">
+//           {title}
+//         </div>
+//         <div
+//           className="cursor-pointer"
+//           onClick={() => setActiveStep(stepNumber)}
+//         >
+//           <i
+//             className={`fa-solid ${
+//               isOpen ? "fa-chevron-up" : "fa-chevron-down"
+//             } pr-8`}
+//           ></i>
+//         </div>
+//       </div>
+
+//       {/* Accordion content with smooth transition */}
+//       <div
+//         className={`transition-all duration-500 ease-in-out overflow-hidden ${
+//           isOpen ? "max-h-[900px] opacity-100" : "max-h-0 opacity-0"
+//         }`}
+//       >
+//         <div className="border-t-[1px] bg-white text-black p-2">{children}</div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Accordion;
+{
+  /* <i
+            className={`fa-solid ${
+              isOpen ? "fa-chevron-up" : "fa-chevron-down"
+            } pr-8`}
+          ></i> */
+}
+{
+  /* <select
+            name="customer"
+            id=""
+            className=" mt-2 ml-4 text-md px-3 py-1.5 border border-gray-300 rounded-md focus:ring-1 focus:ring-indigo-600  text-gray-900 focus:outline-none  transition-all duration-200 hover:bg-gray-50 w-[500px] appearance-none"
+          >
+              
+            <option value="0">Select Customer</option>
+            <option value="10">10%</option>
+            <option value="20">20%</option>
+          </select> */
+}

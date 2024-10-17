@@ -7,7 +7,7 @@ function Checkbox({ label, onChange }) {
         className="cursor-pointer accent-blue-800"
         onChange={onChange}
       />
-      <label className="cursor-pointer font-light font-xs" for="1">
+      <label className="cursor-pointer font-light font-xs" htmlFor="1">
         {label}
       </label>
     </div>
