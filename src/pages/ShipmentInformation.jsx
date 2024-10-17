@@ -111,7 +111,6 @@ function ShipmentInformation({ setActiveStep }) {
         qty,
       });
       setActiveStep(4);
-      setShowChangeButton(true);
     }
   };
 
