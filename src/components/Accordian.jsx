@@ -9,23 +9,28 @@ function Accordion({
 }) {
   return (
     <div
-      className={`cursor-pointer border w-[750px] rounded-md pt-3 mt-3 transition-colors duration-300 ${
+      className={`cursor-pointer border w-[800px] rounded-md pt-3 mt-3 transition-colors duration-300 ${
         isOpen ? "bg-gray-50" : "bg-white"
       }`}
     >
       <div className="flex flex-row justify-between">
         <div className="cursor-pointer font-normal px-8 pb-3 text-md">
           <span
-            className={`px-2 py-0.5 mr-2 rounded-md text-xs ${
-              isOpen ? "bg-black text-white" : "bg-gray-100 text-black"
-            } ${activeStep > stepNumber ? "bg-green-500 text-white" : ""}`}
+            className={`px-2 py-0.5 mr-2 rounded-md text-xs 
+              ${activeStep < stepNumber && "bg-gray-200 text-black"}
+                ${activeStep > stepNumber && "bg-green-500 text-white"}
+               ${activeStep === stepNumber && "bg-black text-white"}
+              `}
           >
             {activeStep > stepNumber ? (
-              <i className="fa fa-check"></i>
+              <span>
+                <i className="fa fa-check"></i>
+              </span>
             ) : (
               stepNumber
             )}
           </span>
+
           <span className={`${isOpen ? "text-black" : "text-gray-700"}`}>
             {title}
           </span>

@@ -1,5 +1,4 @@
 import React from "react";
-import Accordion from "../components/Accordian";
 import Button from "../components/Button";
 import Select from "../components/Select";
 import { useState } from "react";
@@ -10,7 +9,6 @@ function Consigner({ setActiveStep }) {
   ];
   const [searchCustomer, setSearchCustomer] = useState("");
   const [searchCustomerMessage, setSearchCustomerMessage] = useState("");
-  // const [isOpen,setIsOpen] = useState(false)
 
   const searchCustomerValidation = () => {
     if (searchCustomer === "") {
@@ -53,7 +51,6 @@ function Consigner({ setActiveStep }) {
         onClick={handleValidation}
         className="ml-[550px] "
       />
-      {/* </Accordion> */}
     </form>
   );
 }

@@ -9,8 +9,6 @@ const Shipment2 = ({
   productNameMessage,
   hsnMessage,
   qtyMessage,
-  isOpen,
-  setIsOpen,
 }) => {
   const [addComponent, setAddComponent] = useState([{ component: "" }]);
 

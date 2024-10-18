@@ -214,8 +214,6 @@ function Consignee({ setActiveStep }) {
     }
   };
 
-  //active step - state variable - 1,2,3,4
-
   return (
     <form onSubmit={handleValidation}>
       <div className="pt-1 px-6">
