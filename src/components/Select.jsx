@@ -1,7 +1,7 @@
 import React from "react";
 
 function Select(props) {
-  const { options, onChange, className, value } = props;
+  const { options, onChange, className, value, name } = props;
   return (
     <div className="relative">
       <select
@@ -9,6 +9,7 @@ function Select(props) {
         defaultValue="Choose One"
         onChange={onChange}
         value={value}
+        name={name}
       >
         {options.map((option, index) => (
           <option key={index} value={option.value}>

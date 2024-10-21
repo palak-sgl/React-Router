@@ -6,36 +6,44 @@ import Checkbox from "../components/Checkbox";
 import Button from "../components/Button";
 
 function Consignee({ setActiveStep }) {
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const [countryMessage, setCountryMessage] = useState("");
-  const [selectedState, setSelectedState] = useState("");
-  const [stateMessage, setStateMessage] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [firstNameMessage, setFirstNameMessage] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [lastNameMessage, setLastNameMessage] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [mobileMessage, setMobileMessage] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailMessage, setEmailMessage] = useState("");
-  const [address1, setAddress1] = useState("");
-  const [address1Message, setAddress1Message] = useState("");
-  const [address2, setAddress2] = useState("");
-  const [address2Message, setAddress2Message] = useState("");
-  const [landmark, setLandmark] = useState("");
-  const [city, setCity] = useState("");
-  const [cityMessage, setCityMessage] = useState("");
-  const [pincode, setPincode] = useState("");
-  const [pincodeMessage, setPincodeMessage] = useState("");
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(true);
   const [showBillingAddress, setShowBillingAddress] = useState(false);
-  //const [formFields,setFormFields] = useState({
-  // selectedCountry:"",
-  // countryMessage:""
-  // })
 
-  //value={formFields.countryMessage}
-  //==> setFormFields((prev)=>)
+  const [formFields, setFormFields] = useState({
+    selectedCountry: "",
+    selectedState: "",
+    firstName: "",
+    lastName: "",
+    mobileNumber: "",
+    email: "",
+    address1: "",
+    address2: "",
+    landmark: "",
+    city: "",
+    pincode: "",
+  });
+
+  const [errorMessages, setErrorMessages] = useState({
+    firstNameMessage: "",
+    lastNameMessage: "",
+    mobileMessage: "",
+    emailMessage: "",
+    address1Message: "",
+    address2Message: "",
+    countryMessage: "",
+    stateMessage: "",
+    cityMessage: "",
+    pincodeMessage: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name);
+    setFormFields((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleCheckboxChange = (e) => {
     setBillingSameAsShipping(e.target.checked);
@@ -75,149 +83,113 @@ function Consignee({ setActiveStep }) {
 
   const handleCountryChange = (e) => {
     const country = e.target.value;
-    setSelectedCountry(country);
-    setSelectedState("");
+    setFormFields((prevFields) => ({
+      ...prevFields,
+      selectedCountry: country,
+      selectedState: "",
+    }));
+    setErrorMessages((prev) => ({
+      ...prev,
+      countryMessage: "",
+      stateMessage: "",
+    }));
   };
 
   const handleStateChange = (e) => {
     const state = e.target.value;
-    setSelectedState(state);
+    setFormFields((prevFields) => ({
+      ...prevFields,
+      selectedState: state,
+    }));
+    setErrorMessages((prev) => ({
+      ...prev,
+      stateMessage: "",
+    }));
   };
 
   const handleValidation = (e) => {
     e.preventDefault();
     let isValid = true;
-    let tempEmailMessage = "";
-    let tempFirstNameMessage = "";
-    let tempLastNameMessage = "";
-    let tempMobileMessage = "";
-    let tempAddress1Message = "";
-    let tempAddress2Message = "";
-    let tempCountryMessage = "";
-    let tempStateMessage = "";
-    let tempCityMessage = "";
-    let tempPincodeMessage = "";
+    let newErrorMessages = {};
+
+    const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const nameRegEx = /^[a-zA-Z]+$/;
+    const mobileRegEx = /^[0-9()+\-\s]*$/;
+    const addressRegEx = /^[a-zA-Z0-9,\/#&()_.\-\s]*$/;
+    const cityRegEx = /^[a-zA-Z\s]+$/;
+    const pincodeRegEx = /^[0-9]+$/;
 
     // Email validation
-    const emailRegEx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (email === "") {
-      tempEmailMessage = "Please enter a valid email address";
-      isValid = false;
-    } else if (!emailRegEx.test(email)) {
-      tempEmailMessage = "Email is not valid";
+    if (!emailRegEx.test(formFields.email)) {
+      newErrorMessages.emailMessage = formFields.email
+        ? "Invalid email"
+        : "Email is required";
       isValid = false;
     }
 
     // First Name validation
-    const nameRegEx = /^[a-zA-Z]+$/;
-    if (firstName === "") {
-      tempFirstNameMessage = "First name is required";
-      isValid = false;
-    } else if (!nameRegEx.test(firstName)) {
-      tempFirstNameMessage = "Please enter alphabetic characters";
+    if (!nameRegEx.test(formFields.firstName)) {
+      newErrorMessages.firstNameMessage = formFields.firstName
+        ? "Only letters allowed"
+        : "First name is required";
       isValid = false;
     }
 
     // Last Name validation
-    if (lastName === "") {
-      tempLastNameMessage = "Last name is required";
-      isValid = false;
-    } else if (!nameRegEx.test(lastName)) {
-      tempLastNameMessage = "Please enter alphabetic characters";
+    if (!nameRegEx.test(formFields.lastName)) {
+      newErrorMessages.lastNameMessage = formFields.lastName
+        ? "Only letters allowed"
+        : "Last name is required";
       isValid = false;
     }
 
     // Mobile Number validation
-    const mobileRegEx = /^[0-9()+\-\s]*$/;
-    if (mobileNumber === "") {
-      tempMobileMessage = "Mobile Number is required";
-      isValid = false;
-    } else if (
-      !mobileRegEx.test(mobileNumber) ||
-      mobileNumber.replace(/[^0-9]/g, "").length !== 10
+    if (
+      !mobileRegEx.test(formFields.mobileNumber) ||
+      formFields.mobileNumber.replace(/[^0-9]/g, "").length !== 10
     ) {
-      tempMobileMessage = "Must be a 10 digit mobile number";
+      newErrorMessages.mobileMessage = "Must be a 10 digit mobile number";
       isValid = false;
     }
 
-    // Address 1 validation
-    const addressRegEx = /^[a-zA-Z0-9,\/#&()_.\-\s]*$/;
-    if (address1 === "") {
-      tempAddress1Message = "Address 1 is required";
+    // Address 1 and 2 validation
+    if (!addressRegEx.test(formFields.address1)) {
+      newErrorMessages.address1Message = "Invalid characters in Address 1";
       isValid = false;
-    } else if (!addressRegEx.test(address1)) {
-      tempAddress1Message = "Address 1 can only contain valid characters";
+    }
+    if (!addressRegEx.test(formFields.address2)) {
+      newErrorMessages.address2Message = "Invalid characters in Address 2";
       isValid = false;
     }
 
-    // Address 2 validation
-    if (address2 === "") {
-      tempAddress2Message = "Address 2 is required";
-      isValid = false;
-    } else if (!addressRegEx.test(address2)) {
-      tempAddress2Message = "Address 2 can only contain valid characters";
+    // Country and State validation
+    if (!formFields.selectedCountry) {
+      newErrorMessages.countryMessage = "Country is required";
       isValid = false;
     }
-
-    // Country validation
-    if (selectedCountry === "") {
-      tempCountryMessage = "Please select a country";
-      isValid = false;
-    }
-
-    // State validation
-    if (selectedState === "") {
-      tempStateMessage = "Please select a state";
+    if (!formFields.selectedState) {
+      newErrorMessages.stateMessage = "State is required";
       isValid = false;
     }
 
     // City validation
-    const cityRegEx = /^[a-zA-Z\s]+$/;
-    if (city === "") {
-      tempCityMessage = "City is required";
-      isValid = false;
-    } else if (!cityRegEx.test(city)) {
-      tempCityMessage = "Only alphabets and spaces are allowed";
+    if (!cityRegEx.test(formFields.city)) {
+      newErrorMessages.cityMessage = formFields.city
+        ? "Invalid city name"
+        : "City is required";
       isValid = false;
     }
 
     // Pincode validation
-    const pincodeRegEx = /^[0-9]+$/;
-    if (pincode === "") {
-      tempPincodeMessage = "Pincode is required";
-      isValid = false;
-    } else if (!pincodeRegEx.test(pincode)) {
-      tempPincodeMessage = "Only numbers are allowed";
+    if (!pincodeRegEx.test(formFields.pincode)) {
+      newErrorMessages.pincodeMessage = "Only numbers allowed in Pincode";
       isValid = false;
     }
 
-    setEmailMessage(tempEmailMessage);
-    setFirstNameMessage(tempFirstNameMessage);
-    setLastNameMessage(tempLastNameMessage);
-    setMobileMessage(tempMobileMessage);
-    setAddress1Message(tempAddress1Message);
-    setAddress2Message(tempAddress2Message);
-    setCountryMessage(tempCountryMessage);
-    setStateMessage(tempStateMessage);
-    setCityMessage(tempCityMessage);
-    setPincodeMessage(tempPincodeMessage);
+    setErrorMessages(newErrorMessages);
 
     if (isValid) {
-      console.log({
-        firstName,
-        lastName,
-        mobileNumber,
-        email,
-        address1,
-        address2,
-        landmark,
-        selectedCountry,
-        selectedState,
-        city,
-        pincode,
-        billingSameAsShipping,
-      });
-      setActiveStep(3);
+      setActiveStep(3); // Proceed to the next step
     }
   };
 
@@ -230,52 +202,56 @@ function Consignee({ setActiveStep }) {
       </div>
       <div className="grid lg:grid-cols-3 gap-2 py-2 px-6 md:grid-cols-2">
         <div>
-          <Label someLabel="First Name">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="First Name" required></Label>
           <Input
             type="text"
-            value={firstName}
+            value={formFields.firstName}
+            name="firstName"
             placeholder="Enter First Name.."
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={handleInputChange}
           />
-          <p className="text-xs text-red-600 font-medium">{firstNameMessage}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.firstNameMessage}
+          </p>
         </div>
         <div>
-          <Label someLabel="Last Name">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="Last Name" required></Label>
           <Input
             type="text"
             placeholder="Enter Last Name.."
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            value={formFields.lastName}
+            onChange={handleInputChange}
+            name="lastName"
           />
-          <p className="text-xs text-red-600 font-medium">{lastNameMessage}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.lastNameMessage}
+          </p>
         </div>
         <div>
-          <Label someLabel="Mobile Number">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="Mobile Number" required></Label>
           <Input
             type="text"
             placeholder="Enter Mobile Number.."
-            value={mobileNumber}
-            onChange={(e) => setMobileNumber(e.target.value)}
+            value={formFields.mobileNumber}
+            onChange={handleInputChange}
+            name="mobileNumber"
           />
-          <p className="text-xs text-red-600 font-medium">{mobileMessage}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.mobileMessage}
+          </p>
         </div>
         <div>
-          <Label someLabel="Email Address">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="Email Address" required></Label>
           <Input
             type="email"
             placeholder="Enter Email Address.."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formFields.email}
+            name="email"
+            onChange={handleInputChange}
           />
-          <p className="text-xs text-red-600 font-medium">{emailMessage}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.emailMessage}
+          </p>
         </div>
       </div>
 
@@ -286,85 +262,92 @@ function Consignee({ setActiveStep }) {
       </div>
       <div className="grid lg:grid-cols-3 gap-2 py-2 px-6 md:grid-cols-2">
         <div>
-          <Label someLabel="Address 1">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="Address 1" required></Label>
           <Input
             type="text"
             placeholder="Enter Address 1.."
-            value={address1}
-            onChange={(e) => setAddress1(e.target.value)}
+            value={formFields.address1}
+            onChange={handleInputChange}
+            name="address1"
           />
-          <p className="text-xs text-red-600 font-medium">{address1Message}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.address1Message}
+          </p>
         </div>
         <div>
-          <Label someLabel="Address 2">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="Address 2" required></Label>
           <Input
             type="text"
             placeholder="Enter Address 2.."
-            value={address2}
-            onChange={(e) => setAddress2(e.target.value)}
+            value={formFields.address2}
+            onChange={handleInputChange}
+            name="address2"
           />
-          <p className="text-xs text-red-600 font-medium">{address2Message}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.address2Message}
+          </p>
         </div>
         <div>
           <Label someLabel="Landmark" />
           <Input
             type="text"
             placeholder="Enter Landmark.."
-            value={landmark}
-            onChange={(e) => setLandmark(e.target.value)}
+            value={formFields.landmark}
+            onChange={handleInputChange}
+            name="landmark"
           />
         </div>
         <div>
-          <Label someLabel="Country">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="Country" required></Label>
           <Select
             options={countries}
             onChange={handleCountryChange}
-            value={selectedCountry}
+            name="selectedCountry"
+            value={formFields.selectedCountry}
             className="w-52"
           />
-          <p className="text-xs text-red-600 font-medium">{countryMessage}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.countryMessage}
+          </p>
         </div>
         <div>
-          <Label someLabel="State">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="State" required></Label>
           <Select
-            options={states[selectedCountry] || []}
+            options={states[formFields.selectedCountry] || []}
             onChange={handleStateChange}
-            value={selectedState}
+            name="selectedState"
+            value={formFields.selectedState}
             className="w-52 "
           />
-          <p className="text-xs text-red-600 font-medium">{stateMessage}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.stateMessage}
+          </p>
         </div>
         <div>
-          <Label someLabel="City">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="City" required></Label>
           <Input
             type="text"
             placeholder="Enter City.."
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
+            value={formFields.city}
+            onChange={handleInputChange}
+            name="city"
           />
-          <p className="text-xs text-red-600 font-medium">{cityMessage}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.cityMessage}
+          </p>
         </div>
         <div>
-          <Label someLabel="Pincode">
-            <span className="text-red-600 ml-1">*</span>{" "}
-          </Label>
+          <Label someLabel="Pincode" required></Label>
           <Input
             type="text"
             placeholder="Enter Pincode.."
-            value={pincode}
-            onChange={(e) => setPincode(e.target.value)}
+            value={formFields.pincode}
+            onChange={handleInputChange}
+            name="pincode"
           />
-          <p className="text-xs text-red-600 font-medium">{pincodeMessage}</p>
+          <p className="text-xs text-red-600 font-medium">
+            {errorMessages.pincodeMessage}
+          </p>
         </div>
       </div>
       <Checkbox
@@ -382,29 +365,27 @@ function Consignee({ setActiveStep }) {
           </div>
           <div className="grid lg:grid-cols-3 gap-2 py-2 px-6 md:grid-cols-2">
             <div>
-              <Label someLabel="Address 1">
-                <span className="text-red-600 ml-1">*</span>{" "}
-              </Label>
+              <Label someLabel="Address 1" required></Label>
               <Input
                 type="text"
                 placeholder="Enter Address 1.."
-                onChange={(e) => setAddress1(e.target.value)}
+                onChange={handleInputChange}
+                name="address1"
               />
               <p className="text-xs text-red-600 font-medium">
-                {address1Message}
+                {errorMessages.address1Message}
               </p>
             </div>
             <div>
-              <Label someLabel="Address 2">
-                <span className="text-red-600 ml-1">*</span>{" "}
-              </Label>
+              <Label someLabel="Address 2" required></Label>
               <Input
                 type="text"
                 placeholder="Enter Address 2.."
-                onChange={(e) => setAddress2(e.target.value)}
+                onChange={handleInputChange}
+                name="address2"
               />
               <p className="text-xs text-red-600 font-medium">
-                {address2Message}
+                {errorMessages.address2Message}
               </p>
             </div>
             <div>
@@ -412,55 +393,58 @@ function Consignee({ setActiveStep }) {
               <Input
                 type="text"
                 placeholder="Enter Landmark.."
-                onChange={(e) => setLandmark(e.target.value)}
+                onChange={handleInputChange}
+                name="landmark"
               />
             </div>
             <div>
-              <Label someLabel="Country">
-                <span className="text-red-600 ml-1">*</span>{" "}
-              </Label>
+              <Label someLabel="Country" required></Label>
               <Select
                 options={countries}
                 onChange={handleCountryChange}
                 className="w-52 left-44"
+                name="selectedCountry"
               />
               <p className="text-xs text-red-600 font-medium">
-                {countryMessage}
+                {errorMessages.countryMessage}
               </p>
             </div>
             <div>
-              <Label someLabel="State">
-                <span className="text-red-600 ml-1">*</span>{" "}
-              </Label>
+              <Label someLabel="State" required></Label>
               <Select
                 options={states[selectedCountry] || []}
                 onChange={handleStateChange}
                 className="w-52 left-44"
+                name="selectedState"
               />
-              <p className="text-xs text-red-600 font-medium">{stateMessage}</p>
+              <p className="text-xs text-red-600 font-medium">
+                {errorMessages.stateMessage}
+              </p>
             </div>
             <div>
-              <Label someLabel="City">
-                <span className="text-red-600 ml-1">*</span>{" "}
-              </Label>
+              <Label someLabel="City" required></Label>
               <Input
                 type="text"
                 placeholder="Enter City.."
-                onChange={(e) => setCity(e.target.value)}
+                onChange={handleInputChange}
+                name="city"
               />
-              <p className="text-xs text-red-600 font-medium">{cityMessage}</p>
+              <p className="text-xs text-red-600 font-medium">
+                {errorMessages.cityMessage}
+              </p>
             </div>
             <div>
-              <Label someLabel="Pincode">
+              <Label someLabel="Pincode" required>
                 <span className="text-red-600 ml-1">*</span>{" "}
               </Label>
               <Input
                 type="text"
                 placeholder="Enter Pincode.."
-                onChange={(e) => setPincode(e.target.value)}
+                onChange={handleInputChange}
+                name="pincode"
               />
               <p className="text-xs text-red-600 font-medium">
-                {pincodeMessage}
+                {errorMessages.pincodeMessage}
               </p>
             </div>
           </div>

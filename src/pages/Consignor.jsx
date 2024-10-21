@@ -32,7 +32,7 @@ function Consignor({ setActiveStep }) {
       <Select
         options={customer}
         value={customer}
-        className="lg:w-[500px] lg:left-[460px] ml-5 focus:outline-none focus:ring-0 focus:border-transparent"
+        className="lg:w-[500px] lg:left-[460px] ml-5 focus:outline-none focus:ring-0 focus:border-transparent md:w-[450px]"
         onChange={(e) => setSearchCustomer(e.target.value)}
       />
       <p className="text-xs text-red-600 font-medium ml-6">

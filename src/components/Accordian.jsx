@@ -9,7 +9,7 @@ function Accordion({
 }) {
   return (
     <div
-      className={`cursor-pointer border w-[800px] rounded-md pt-3 mt-3 transition-colors duration-300 ${
+      className={`cursor-pointer border w-[800px] md:[600px] sm:[400px] rounded-md pt-3 mt-3 transition-colors duration-300 ${
         isOpen ? "bg-gray-50" : "bg-white"
       }`}
     >
