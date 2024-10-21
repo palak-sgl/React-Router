@@ -1,11 +1,11 @@
 function Accordion({
   title,
-  children,
   isOpen,
   activeStep,
   stepNumber,
   setActiveStep,
   showChangeButton,
+  childElement,
 }) {
   return (
     <div
@@ -49,11 +49,14 @@ function Accordion({
           isOpen ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        {isOpen && (
-          <div className="border-t-[1px] bg-white text-black p-2">
-            {children}
-          </div>
-        )}
+        {/* {isOpen && ( */}
+        <div
+          className={`${
+            isOpen ? " " : "hidden"
+          } border-t-[1px] bg-white text-black p-2`}
+        >
+          {childElement}
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import React from "react";
-// import { FaChevronDown } from "react-icons/fa";
 
 function Select(props) {
   const { options, onChange, className, value } = props;

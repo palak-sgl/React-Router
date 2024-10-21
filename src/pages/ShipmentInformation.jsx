@@ -127,9 +127,7 @@ function ShipmentInformation({ setActiveStep }) {
       <form onSubmit={handleValidation}>
         <div className="grid lg:grid-cols-3 gap-3 py-2 px-6 md:grid-cols-2">
           <div>
-            <Label someLabel="Invoice Number">
-              <span className="text-red-600 ml-1">*</span>{" "}
-            </Label>
+            <Label someLabel="Invoice Number" required></Label>
             <Input
               type="text"
               placeholder="Enter Invoice Number.."
@@ -140,9 +138,7 @@ function ShipmentInformation({ setActiveStep }) {
             </p>
           </div>
           <div>
-            <Label someLabel="Invoice Date">
-              <span className="text-red-600 ml-1">*</span>{" "}
-            </Label>
+            <Label someLabel="Invoice Date" required></Label>
             <DatePicker
               placeholder={"Pick a Date"}
               onChange={(e) => setInvoiceDate(e.target.value)}
@@ -152,9 +148,7 @@ function ShipmentInformation({ setActiveStep }) {
             </p>
           </div>
           <div>
-            <Label someLabel="Invoice Currency">
-              <span className="text-red-600 ml-1">*</span>{" "}
-            </Label>
+            <Label someLabel="Invoice Currency" required></Label>
             <Select options={currency} className="w-52" />
           </div>
           <div>
@@ -174,9 +168,7 @@ function ShipmentInformation({ setActiveStep }) {
         </div>
         <div className="grid lg:grid-cols-4 gap-2 py-2 px-6 md:grid-cols-2">
           <div>
-            <Label someLabel="Dead Weight">
-              <span className="text-red-600 ml-1">*</span>{" "}
-            </Label>
+            <Label someLabel="Dead Weight" required></Label>
             <div className="flex  mt-2">
               <input
                 type="number"
@@ -194,9 +186,7 @@ function ShipmentInformation({ setActiveStep }) {
             </p>
           </div>
           <div>
-            <Label someLabel="Length">
-              <span className="text-red-600 ml-1">*</span>{" "}
-            </Label>
+            <Label someLabel="Length" required></Label>
             <div className="flex mt-2">
               <input
                 type="number"
@@ -212,9 +202,7 @@ function ShipmentInformation({ setActiveStep }) {
             <p className="text-xs text-red-600 font-medium">{lengthMessage}</p>
           </div>
           <div>
-            <Label someLabel="Breadth">
-              <span className="text-red-600 ml-1">*</span>{" "}
-            </Label>
+            <Label someLabel="Breadth" required></Label>
             <div className="flex  mt-2">
               <input
                 type="number"
@@ -230,9 +218,7 @@ function ShipmentInformation({ setActiveStep }) {
             <p className="text-xs text-red-600 font-medium">{breadthMessage}</p>
           </div>
           <div>
-            <Label someLabel="Height">
-              <span className="text-red-600 ml-1">*</span>{" "}
-            </Label>
+            <Label someLabel="Height" required></Label>
             <div className="flex  mt-2">
               <input
                 type="number"

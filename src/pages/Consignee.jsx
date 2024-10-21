@@ -27,8 +27,15 @@ function Consignee({ setActiveStep }) {
   const [cityMessage, setCityMessage] = useState("");
   const [pincode, setPincode] = useState("");
   const [pincodeMessage, setPincodeMessage] = useState("");
-  const [billingSameAsShipping, setBillingSameAsShipping] = useState(false);
+  const [billingSameAsShipping, setBillingSameAsShipping] = useState(true);
   const [showBillingAddress, setShowBillingAddress] = useState(false);
+  //const [formFields,setFormFields] = useState({
+  // selectedCountry:"",
+  // countryMessage:""
+  // })
+
+  //value={formFields.countryMessage}
+  //==> setFormFields((prev)=>)
 
   const handleCheckboxChange = (e) => {
     setBillingSameAsShipping(e.target.checked);
@@ -228,6 +235,7 @@ function Consignee({ setActiveStep }) {
           </Label>
           <Input
             type="text"
+            value={firstName}
             placeholder="Enter First Name.."
             onChange={(e) => setFirstName(e.target.value)}
           />
@@ -240,6 +248,7 @@ function Consignee({ setActiveStep }) {
           <Input
             type="text"
             placeholder="Enter Last Name.."
+            value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
           <p className="text-xs text-red-600 font-medium">{lastNameMessage}</p>
@@ -251,6 +260,7 @@ function Consignee({ setActiveStep }) {
           <Input
             type="text"
             placeholder="Enter Mobile Number.."
+            value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value)}
           />
           <p className="text-xs text-red-600 font-medium">{mobileMessage}</p>
@@ -262,6 +272,7 @@ function Consignee({ setActiveStep }) {
           <Input
             type="email"
             placeholder="Enter Email Address.."
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <p className="text-xs text-red-600 font-medium">{emailMessage}</p>
@@ -281,6 +292,7 @@ function Consignee({ setActiveStep }) {
           <Input
             type="text"
             placeholder="Enter Address 1.."
+            value={address1}
             onChange={(e) => setAddress1(e.target.value)}
           />
           <p className="text-xs text-red-600 font-medium">{address1Message}</p>
@@ -292,6 +304,7 @@ function Consignee({ setActiveStep }) {
           <Input
             type="text"
             placeholder="Enter Address 2.."
+            value={address2}
             onChange={(e) => setAddress2(e.target.value)}
           />
           <p className="text-xs text-red-600 font-medium">{address2Message}</p>
@@ -301,6 +314,7 @@ function Consignee({ setActiveStep }) {
           <Input
             type="text"
             placeholder="Enter Landmark.."
+            value={landmark}
             onChange={(e) => setLandmark(e.target.value)}
           />
         </div>
@@ -311,6 +325,7 @@ function Consignee({ setActiveStep }) {
           <Select
             options={countries}
             onChange={handleCountryChange}
+            value={selectedCountry}
             className="w-52"
           />
           <p className="text-xs text-red-600 font-medium">{countryMessage}</p>
@@ -322,6 +337,7 @@ function Consignee({ setActiveStep }) {
           <Select
             options={states[selectedCountry] || []}
             onChange={handleStateChange}
+            value={selectedState}
             className="w-52 "
           />
           <p className="text-xs text-red-600 font-medium">{stateMessage}</p>
@@ -333,6 +349,7 @@ function Consignee({ setActiveStep }) {
           <Input
             type="text"
             placeholder="Enter City.."
+            value={city}
             onChange={(e) => setCity(e.target.value)}
           />
           <p className="text-xs text-red-600 font-medium">{cityMessage}</p>
@@ -344,6 +361,7 @@ function Consignee({ setActiveStep }) {
           <Input
             type="text"
             placeholder="Enter Pincode.."
+            value={pincode}
             onChange={(e) => setPincode(e.target.value)}
           />
           <p className="text-xs text-red-600 font-medium">{pincodeMessage}</p>
@@ -352,6 +370,7 @@ function Consignee({ setActiveStep }) {
       <Checkbox
         label="Billing address is same as shipping address"
         onChange={handleCheckboxChange}
+        checked={billingSameAsShipping}
       />
 
       {showBillingAddress && (

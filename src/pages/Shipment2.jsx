@@ -11,7 +11,6 @@ const Shipment2 = ({
   qtyMessage,
 }) => {
   const [addComponent, setAddComponent] = useState([{ component: "" }]);
-
   const handleAddComponent = (e) => {
     e.preventDefault();
     setAddComponent((prev) => [...prev, { component: "" }]);
@@ -20,23 +19,16 @@ const Shipment2 = ({
     const updatedComponents = addComponent.filter(
       (_, index) => index !== indexToRemove
     );
-
     setAddComponent(updatedComponents);
   };
-
-  const igst = [
-    { value: "india", label: "0%" },
-    { value: "usa", label: "10%" },
-  ];
+  const igst = [{ value: "india", label: "0%" }];
 
   return (
     <div>
       {addComponent.map((singleComponent, index) => (
         <div className="grid lg:grid-cols-6 gap-2 py-2 px-6 md:grid-cols-2 mt-2">
           <div>
-            <Label someLabel="Product Name">
-              <span className="text-red-600 ml-1">*</span>{" "}
-            </Label>
+            <Label someLabel="Product Name" required></Label>
             <Input
               type="text"
               placeholder="Enter Product Name.."
@@ -64,9 +56,7 @@ const Shipment2 = ({
           </div>
 
           <div>
-            <Label someLabel="Qty">
-              <span className="text-red-600 ml-1">*</span>
-            </Label>
+            <Label someLabel="Qty" required></Label>
             <Input
               type="number"
               placeholder="Enter Qty.."
@@ -75,15 +65,11 @@ const Shipment2 = ({
             <p className="text-xs text-red-600 font-medium">{qtyMessage}</p>
           </div>
           <div>
-            <Label someLabel="Unit Price (INR)">
-              <span className="text-red-600 ml-1">*</span>
-            </Label>
+            <Label someLabel="Unit Price (INR)" required></Label>
             <Input type="number" placeholder="Enter Unit Price (INR).." />
           </div>
           <div>
-            <Label someLabel="IGST">
-              <span className="text-red-600 ml-1">*</span>
-            </Label>
+            <Label someLabel="IGST" required></Label>
             <div className="flex items-center">
               <div>
                 <select
@@ -92,8 +78,6 @@ const Shipment2 = ({
                   disabled
                 >
                   <option value="0">0%</option>
-                  <option value="10">10%</option>
-                  <option value="20">20%</option>
                 </select>
               </div>
               {index > 0 && (
@@ -109,7 +93,6 @@ const Shipment2 = ({
         </div>
       ))}
       <h2 className="font-semibold text-end mr-4">Total Price : INR 0.00</h2>
-
       <button
         className="text-indigo-800 font-semibold ml-4 "
         onClick={handleAddComponent}
