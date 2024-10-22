@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Label from "../components/Label";
-import Input from "../components/Input";
 import Select from "../components/Select";
 import Checkbox from "../components/Checkbox";
 import Button from "../components/Button";
+import InputForm from "../components/InputForm";
 
 function Consignee({ setActiveStep }) {
   const [billingSameAsShipping, setBillingSameAsShipping] = useState(true);
@@ -153,11 +153,17 @@ function Consignee({ setActiveStep }) {
     }
 
     // Address 1 and 2 validation
-    if (!addressRegEx.test(formFields.address1)) {
+    if (formFields.address1 === "") {
+      newErrorMessages.address1Message = "Field cannot be empty";
+      isValid = false;
+    } else if (!addressRegEx.test(formFields.address1)) {
       newErrorMessages.address1Message = "Invalid characters in Address 1";
       isValid = false;
     }
-    if (!addressRegEx.test(formFields.address2)) {
+    if (formFields.address2 === "") {
+      newErrorMessages.address2Message = "Field cannot be empty";
+      isValid = false;
+    } else if (!addressRegEx.test(formFields.address2)) {
       newErrorMessages.address2Message = "Invalid characters in Address 2";
       isValid = false;
     }
@@ -189,7 +195,7 @@ function Consignee({ setActiveStep }) {
     setErrorMessages(newErrorMessages);
 
     if (isValid) {
-      setActiveStep(3); // Proceed to the next step
+      setActiveStep(3);
     }
   };
 
@@ -200,54 +206,57 @@ function Consignee({ setActiveStep }) {
           Personal Details
         </h2>
       </div>
-      <div className="grid lg:grid-cols-3 gap-2 py-2 px-6 md:grid-cols-2">
+      <div className="grid lg:grid-cols-3 gap-2 py-1.5 px-6 md:grid-cols-2">
         <div>
-          <Label someLabel="First Name" required></Label>
-          <Input
+          <InputForm
+            someLabel="First Name"
             type="text"
-            value={formFields.firstName}
-            name="firstName"
             placeholder="Enter First Name.."
+            value={formFields.firstName}
             onChange={handleInputChange}
+            name="firstName"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.firstNameMessage}
           </p>
         </div>
         <div>
-          <Label someLabel="Last Name" required></Label>
-          <Input
+          <InputForm
+            someLabel="Last Name"
             type="text"
             placeholder="Enter Last Name.."
             value={formFields.lastName}
             onChange={handleInputChange}
             name="lastName"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.lastNameMessage}
           </p>
         </div>
         <div>
-          <Label someLabel="Mobile Number" required></Label>
-          <Input
+          <InputForm
+            someLabel="Mobile Number"
             type="text"
             placeholder="Enter Mobile Number.."
             value={formFields.mobileNumber}
             onChange={handleInputChange}
             name="mobileNumber"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.mobileMessage}
           </p>
         </div>
         <div>
-          <Label someLabel="Email Address" required></Label>
-          <Input
-            type="email"
+          <InputForm
+            someLabel="Email Address"
             placeholder="Enter Email Address.."
             value={formFields.email}
             name="email"
             onChange={handleInputChange}
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.emailMessage}
@@ -262,35 +271,36 @@ function Consignee({ setActiveStep }) {
       </div>
       <div className="grid lg:grid-cols-3 gap-2 py-2 px-6 md:grid-cols-2">
         <div>
-          <Label someLabel="Address 1" required></Label>
-          <Input
+          <InputForm
+            someLabel="Address 1"
             type="text"
             placeholder="Enter Address 1.."
             value={formFields.address1}
             onChange={handleInputChange}
             name="address1"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.address1Message}
           </p>
         </div>
         <div>
-          <Label someLabel="Address 2" required></Label>
-          <Input
+          <InputForm
+            someLabel="Address 2"
             type="text"
             placeholder="Enter Address 2.."
             value={formFields.address2}
             onChange={handleInputChange}
             name="address2"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.address2Message}
           </p>
         </div>
         <div>
-          <Label someLabel="Landmark" />
-          <Input
-            type="text"
+          <InputForm
+            someLabel="Landmark"
             placeholder="Enter Landmark.."
             value={formFields.landmark}
             onChange={handleInputChange}
@@ -305,6 +315,7 @@ function Consignee({ setActiveStep }) {
             name="selectedCountry"
             value={formFields.selectedCountry}
             className="w-52"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.countryMessage}
@@ -317,33 +328,36 @@ function Consignee({ setActiveStep }) {
             onChange={handleStateChange}
             name="selectedState"
             value={formFields.selectedState}
-            className="w-52 "
+            className="w-52"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.stateMessage}
           </p>
         </div>
         <div>
-          <Label someLabel="City" required></Label>
-          <Input
+          <InputForm
+            someLabel="City"
             type="text"
             placeholder="Enter City.."
             value={formFields.city}
             onChange={handleInputChange}
             name="city"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.cityMessage}
           </p>
         </div>
         <div>
-          <Label someLabel="Pincode" required></Label>
-          <Input
+          <InputForm
+            someLabel="Pincode"
             type="text"
             placeholder="Enter Pincode.."
             value={formFields.pincode}
             onChange={handleInputChange}
             name="pincode"
+            required
           />
           <p className="text-xs text-red-600 font-medium">
             {errorMessages.pincodeMessage}
@@ -365,34 +379,38 @@ function Consignee({ setActiveStep }) {
           </div>
           <div className="grid lg:grid-cols-3 gap-2 py-2 px-6 md:grid-cols-2">
             <div>
-              <Label someLabel="Address 1" required></Label>
-              <Input
+              <InputForm
+                someLabel="Address 1"
                 type="text"
                 placeholder="Enter Address 1.."
+                value={formFields.address1}
                 onChange={handleInputChange}
                 name="address1"
+                required
               />
               <p className="text-xs text-red-600 font-medium">
                 {errorMessages.address1Message}
               </p>
             </div>
             <div>
-              <Label someLabel="Address 2" required></Label>
-              <Input
+              <InputForm
+                someLabel="Address 2"
                 type="text"
                 placeholder="Enter Address 2.."
+                value={formFields.address2}
                 onChange={handleInputChange}
                 name="address2"
+                required
               />
               <p className="text-xs text-red-600 font-medium">
                 {errorMessages.address2Message}
               </p>
             </div>
             <div>
-              <Label someLabel="Landmark" />
-              <Input
-                type="text"
+              <InputForm
+                someLabel="Landmark"
                 placeholder="Enter Landmark.."
+                value={formFields.landmark}
                 onChange={handleInputChange}
                 name="landmark"
               />
@@ -404,6 +422,7 @@ function Consignee({ setActiveStep }) {
                 onChange={handleCountryChange}
                 className="w-52 left-44"
                 name="selectedCountry"
+                required
               />
               <p className="text-xs text-red-600 font-medium">
                 {errorMessages.countryMessage}
@@ -412,36 +431,39 @@ function Consignee({ setActiveStep }) {
             <div>
               <Label someLabel="State" required></Label>
               <Select
-                options={states[selectedCountry] || []}
+                options={states[formFields.selectedCountry] || []}
                 onChange={handleStateChange}
                 className="w-52 left-44"
                 name="selectedState"
+                required
               />
               <p className="text-xs text-red-600 font-medium">
                 {errorMessages.stateMessage}
               </p>
             </div>
             <div>
-              <Label someLabel="City" required></Label>
-              <Input
+              <InputForm
+                someLabel="City"
                 type="text"
                 placeholder="Enter City.."
+                value={formFields.city}
                 onChange={handleInputChange}
                 name="city"
+                required
               />
               <p className="text-xs text-red-600 font-medium">
                 {errorMessages.cityMessage}
               </p>
             </div>
             <div>
-              <Label someLabel="Pincode" required>
-                <span className="text-red-600 ml-1">*</span>{" "}
-              </Label>
-              <Input
+              <InputForm
+                someLabel="Pincode"
                 type="text"
                 placeholder="Enter Pincode.."
+                value={formFields.pincode}
                 onChange={handleInputChange}
                 name="pincode"
+                required
               />
               <p className="text-xs text-red-600 font-medium">
                 {errorMessages.pincodeMessage}

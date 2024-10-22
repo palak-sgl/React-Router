@@ -1,15 +1,8 @@
 import { useState } from "react";
 import Label from "../components/Label";
-import Input from "../components/Input";
+import InputForm from "../components/InputForm";
 
-const Shipment2 = ({
-  setProductName,
-  setHsn,
-  setQty,
-  productNameMessage,
-  hsnMessage,
-  qtyMessage,
-}) => {
+const Shipment2 = ({ handleInputChange, errorMessages }) => {
   const [addComponent, setAddComponent] = useState([{ component: "" }]);
   const handleAddComponent = (e) => {
     e.preventDefault();
@@ -28,45 +21,61 @@ const Shipment2 = ({
       {addComponent.map((singleComponent, index) => (
         <div className="grid lg:grid-cols-6 gap-2 py-2 px-6 md:grid-cols-2 mt-2">
           <div>
-            <Label someLabel="Product Name" required></Label>
-            <Input
+            <InputForm
+              someLabel="Product Name"
               type="text"
+              name="productName"
               placeholder="Enter Product Name.."
               className="w-24"
-              onChange={(e) => setProductName(e.target.value)}
+              onChange={handleInputChange}
+              required
             />
             <p className="text-xs text-red-600 font-medium">
-              {productNameMessage}
+              {errorMessages.productNameMessage}
             </p>
           </div>
           <div>
-            <Label someLabel="SKU"></Label>
-            <Input type="text" placeholder="Enter SKU.." />
+            <InputForm someLabel="SKU" type="text" placeholder="Enter SKU.." />
           </div>
           <div>
-            <Label someLabel="HSN">
-              <span className="text-red-600 ml-1">*</span>
-            </Label>
-            <Input
+            <InputForm
+              someLabel="HSN"
               type="text"
               placeholder="Enter HSN.."
-              onChange={(e) => setHsn(e.target.value)}
+              name="hsn"
+              onChange={handleInputChange}
+              required
             />
-            <p className="text-xs text-red-600 font-medium">{hsnMessage}</p>
+            <p className="text-xs text-red-600 font-medium">
+              {errorMessages.hsnMessage}
+            </p>
           </div>
 
           <div>
-            <Label someLabel="Qty" required></Label>
-            <Input
+            <InputForm
+              someLabel="Qty"
               type="number"
               placeholder="Enter Qty.."
-              onChange={(e) => setQty(e.target.value)}
+              name="qty"
+              onChange={handleInputChange}
+              required
             />
-            <p className="text-xs text-red-600 font-medium">{qtyMessage}</p>
+            <p className="text-xs text-red-600 font-medium">
+              {errorMessages.qtyMessage}
+            </p>
           </div>
           <div>
-            <Label someLabel="Unit Price (INR)" required></Label>
-            <Input type="number" placeholder="Enter Unit Price (INR).." />
+            <InputForm
+              someLabel="Unit Price (INR)"
+              type="number"
+              placeholder="Enter Unit Price (INR).."
+              name="unitPrice"
+              onChange={handleInputChange}
+              required
+            />
+            <p className="text-xs text-red-600 font-medium">
+              {errorMessages.unitPriceMessage}
+            </p>
           </div>
           <div>
             <Label someLabel="IGST" required></Label>
