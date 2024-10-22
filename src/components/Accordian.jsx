@@ -4,7 +4,6 @@ function Accordion({
   activeStep,
   stepNumber,
   setActiveStep,
-  showChangeButton,
   childElement,
 }) {
   return (
@@ -40,7 +39,7 @@ function Accordion({
             className="text-blue-800 underline text-sm mr-8 mb-3"
             onClick={() => setActiveStep(stepNumber)}
           >
-            {showChangeButton}
+            Change
           </button>
         )}
       </div>

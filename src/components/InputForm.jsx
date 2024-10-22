@@ -9,6 +9,7 @@ function InputForm({
   placeholder,
   onChange,
   required,
+  errorMessages,
 }) {
   return (
     <div>
@@ -20,6 +21,7 @@ function InputForm({
         placeholder={placeholder}
         onChange={onChange}
       />
+      <p className="text-xs text-red-600 font-medium">{errorMessages}</p>
     </div>
   );
 }

@@ -146,20 +146,16 @@ function ShipmentInformation({ setActiveStep }) {
     <div>
       <form onSubmit={handleValidation}>
         <div className="grid lg:grid-cols-3 gap-3 py-2 px-6 md:grid-cols-2">
-          <div>
-            <InputForm
-              someLabel="Invoice Number"
-              type="text"
-              placeholder="Enter Invoice Number.."
-              name="invoiceNumber"
-              value={formFields.invoiceNumber}
-              onChange={handleInputChange}
-              required
-            />
-            <p className="text-xs text-red-600 font-medium">
-              {errorMessages.invoiceNumberMessage}
-            </p>
-          </div>
+          <InputForm
+            someLabel="Invoice Number"
+            type="text"
+            placeholder="Enter Invoice Number.."
+            name="invoiceNumber"
+            value={formFields.invoiceNumber}
+            onChange={handleInputChange}
+            required
+            errorMessages={errorMessages.invoiceNumberMessage}
+          />
           <div>
             <Label someLabel="Invoice Date" required></Label>
             <DatePicker
@@ -167,29 +163,25 @@ function ShipmentInformation({ setActiveStep }) {
               name="invoiceDate"
               value={formFields.invoiceDate}
               onChange={handleInputChange}
+              errorMessages={errorMessages.invoiceDateMessage}
             />
-            <p className="text-xs text-red-600 font-medium">
-              {errorMessages.invoiceDateMessage}
-            </p>
           </div>
           <div>
-            <Label someLabel="Invoice Currency" required></Label>
+            <Label someLabel="Invoice Currency"></Label>
             <Select options={currency} className="w-52" />
           </div>
-          <div>
-            <InputForm
-              someLabel="Order/Reference ID"
-              type="text"
-              placeholder="Enter Order/Reference ID.."
-            />
-          </div>
-          <div>
-            <InputForm
-              someLabel="IOSS Number"
-              type="text"
-              placeholder="Enter IOSS Number.."
-            />
-          </div>
+
+          <InputForm
+            someLabel="Order/Reference ID"
+            type="text"
+            placeholder="Enter Order/Reference ID.."
+          />
+
+          <InputForm
+            someLabel="IOSS Number"
+            type="text"
+            placeholder="Enter IOSS Number.."
+          />
         </div>
 
         <div className="pt-1 px-6">
@@ -208,11 +200,9 @@ function ShipmentInformation({ setActiveStep }) {
                 name="deadWeight"
                 value={formFields.deadWeight}
                 dimension="kg"
+                errorMessages={errorMessages.deadWeightMessage}
               />
             </div>
-            <p className="text-xs text-red-600 font-medium">
-              {errorMessages.deadWeightMessage}
-            </p>
           </div>
           <div>
             <Label someLabel="Length" required></Label>
@@ -224,11 +214,9 @@ function ShipmentInformation({ setActiveStep }) {
                 name="length"
                 value={formFields.length}
                 dimension="cm"
+                errorMessages={errorMessages.lengthMessage}
               />
             </div>
-            <p className="text-xs text-red-600 font-medium">
-              {errorMessages.lengthMessage}
-            </p>
           </div>
           <div>
             <Label someLabel="Breadth" required></Label>
@@ -240,11 +228,9 @@ function ShipmentInformation({ setActiveStep }) {
                 name="breadth"
                 value={formFields.length}
                 dimension="cm"
+                errorMessages={errorMessages.breadthMessage}
               />
             </div>
-            <p className="text-xs text-red-600 font-medium">
-              {errorMessages.breadthMessage}
-            </p>
           </div>
           <div>
             <Label someLabel="Height" required></Label>
@@ -256,11 +242,9 @@ function ShipmentInformation({ setActiveStep }) {
                 name="height"
                 value={formFields.length}
                 dimension="cm"
+                errorMessages={errorMessages.heightMessage}
               />
             </div>
-            <p className="text-xs text-red-600 font-medium">
-              {errorMessages.heightMessage}
-            </p>
           </div>
         </div>
 

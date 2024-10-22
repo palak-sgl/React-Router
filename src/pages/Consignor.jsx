@@ -13,7 +13,9 @@ function Consignor({ setActiveStep }) {
   const handleValidation = (e) => {
     e.preventDefault();
     let tempCustomerMessage = "";
+
     if (!searchCustomer) {
+      console.log(searchCustomer);
       tempCustomerMessage = "Please select a customer or add new customer";
     }
     setSearchCustomerMessage(tempCustomerMessage);
@@ -27,17 +29,16 @@ function Consignor({ setActiveStep }) {
   return (
     <form>
       <div className="pt-1 px-6">
-        <h2 className="text-[15px]  text-left">Search Customer</h2>
+        <h2 className="text-2  text-left">Search Customer</h2>
       </div>
       <Select
         options={customer}
-        value={customer}
+        value={searchCustomer}
         className="lg:w-[500px] lg:left-[460px] ml-5 focus:outline-none focus:ring-0 focus:border-transparent md:w-[450px]"
+        classNameChevron="left-[470px]"
         onChange={(e) => setSearchCustomer(e.target.value)}
+        errorMessages={searchCustomerMessage}
       />
-      <p className="text-xs text-red-600 font-medium ml-6">
-        {searchCustomerMessage}
-      </p>
       <Button
         label="Continue"
         color="indigo"
